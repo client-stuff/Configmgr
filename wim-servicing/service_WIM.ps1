@@ -1,4 +1,20 @@
-﻿[CmdletBinding(DefaultParameterSetName='FullOptions')]
+﻿<#
+.Synopsis
+   Service_WIM_Proper.ps1
+.DESCRIPTION
+    Created: 2018-12-10
+    Version: 1.0
+
+    Author : Pontus Wendt
+    Homepage : https://clientstuff.blog
+
+    Disclaimer: This script is provided "AS IS" with no warranties, confers no rights and
+    is not supported by the author.
+.EXAMPLE
+    NA
+#>
+
+[CmdletBinding(DefaultParameterSetName='FullOptions')]
 
 param(
 

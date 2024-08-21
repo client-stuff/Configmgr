@@ -6,6 +6,7 @@
     Version: 1.0
 
     Author : Pontus Wendt
+    Homepage : https://clientstuff.blog
 
     Disclaimer: This script is provided "AS IS" with no warranties, confers no rights and
     is not supported by the author.
@@ -50,7 +51,7 @@ Set-location $Path
 .\Service_WIM.ps1 -SourceImage "$Path\$Month\install.wim" -MountDir $MountedPath -DestinationImage $DestinationPath -WinVersion "Windows 10 Enterprise"
 
 #change location
-CD P01:
+Set-Location P01:
 
 
 #Import Operating system image

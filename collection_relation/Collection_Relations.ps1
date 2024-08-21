@@ -47,7 +47,7 @@ $CollectionID = $Collection.CollectionID
 #########   SQL THINGS   ###################
 Import-module SQLPS -DisableNameChecking
 
-CD SQLServer:\
+Set-Location SQLServer:\
 
 $query = "
 (

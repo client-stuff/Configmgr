@@ -1,4 +1,9 @@
-﻿# Site configuration
+﻿#This script att Variables to a bunch of computers in a collection
+
+#Author : Pontus Wendt
+#Homepage : https://Clientstuff.blog
+
+# Site configuration
 $SiteCode = "PS1" # Site code 
 $ProviderMachineName = "CM01.corp.viamonstra.com" # SMS Provider machine name
 
