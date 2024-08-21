@@ -2,8 +2,9 @@
 .Synopsis
    Reading a Registry key if it exist or not.
 .DESCRIPTION
-   Reading a registrykey if it exist then write (1=True) (0=False)
-   By Pontus Wendt
+    Reading a registrykey if it exist then write (1=True) (0=False)
+    #Author : Pontus Wendt
+    #Homepage : https://Clientstuff.blog
 #>
 function Get-Registrykey
 {
@@ -21,19 +22,22 @@ function Get-Registrykey
      
     ForEach-Object {
             If($Result -match "True") { 
-                $State = 1} 
+                } 
+                
             ElseIf($Result -match "False") {
-                $State = 0} 
+                }
+                
                     }
      }
    catch {
    # Error hantering
    
    }
-   $state
+  
 
 
     }
+    
     End
     {
     }

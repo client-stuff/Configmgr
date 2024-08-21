@@ -7,7 +7,7 @@
 
     Author : Pontus Wendt
     Twitter: @pontuswendt
-    Blog   : https://pontuswendt.blog
+    Blog   : https://clientstuff.blog
 
     Disclaimer: This script is provided "AS IS" with no warranties, confers no rights and
     is not supported by the author.
@@ -29,7 +29,7 @@ $Domain = "test.pontus.com"
 #Domain in ADSI
 $DomainADSI ="DC=test,DC=pontus,DC=com"
 #Gather the OU folders, that will be created, every folder you search for will be created.
-$GADOU = Get-ADOrganizationalUnit -LDAPFilter '(name=*)' -SearchBase $DomainADSI -SearchScope OneLevel -Properties CanonicalName | Select Name
+$GADOU = Get-ADOrganizationalUnit -LDAPFilter '(name=*)' -SearchBase $DomainADSI -SearchScope OneLevel -Properties CanonicalName | Select-Object Name
 #SCCM Query
 $query="select SMS_R_SYSTEM.ResourceID,SMS_R_SYSTEM.ResourceType,SMS_R_SYSTEM.Name,SMS_R_SYSTEM.SMSUniqueIdentifier,SMS_R_SYSTEM.ResourceDomainORWorkgroup,SMS_R_SYSTEM.Client from SMS_R_System where SMS_R_System.SystemOUName like '$domain/Computers%'"
 #Specify the sitecode of your SCCM
@@ -40,7 +40,7 @@ $CMFolderPath = "$SiteCode\DeviceCollection\Computers from OU"
 
 
 #Change Location to primary site
-CD $SiteCode 
+Set-Location $SiteCode 
 
 #Functions
 #WriteLog function
@@ -57,7 +57,7 @@ Function WriteLog ($message)
 Function AddCollection
 {
     #Check if name already exists
-    if ((Get-CMDeviceCollection -Name "$Collectionname") -ne $null)
+    if ($null -ne (Get-CMDeviceCollection -Name "$Collectionname"))
     {
         WriteLog "$Collectionname exists. Skipping."
         return 
@@ -78,7 +78,7 @@ Function AddCollection
         WriteLog "Created Schedule: $Schedule"
         
         WriteLog "Creating collection $Collectionname"
-        $newcollection=New-CMDeviceCollection -Name "$Collectionname" -LimitingCollectionName "All systems" -RefreshSchedule $Schedule
+
         
         ##MODIFY THIS ALSO##
         $query="select SMS_R_SYSTEM.ResourceID,SMS_R_SYSTEM.ResourceType,SMS_R_SYSTEM.Name,SMS_R_SYSTEM.SMSUniqueIdentifier,SMS_R_SYSTEM.ResourceDomainORWorkgroup,SMS_R_SYSTEM.Client from SMS_R_System where SMS_R_System.SystemOUName like '$domain/$names/Clients/XX/%'"
