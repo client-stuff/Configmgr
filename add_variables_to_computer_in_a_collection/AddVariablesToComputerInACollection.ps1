@@ -3,11 +3,11 @@ $SiteCode = "PS1" # Site code
 $ProviderMachineName = "CM01.corp.viamonstra.com" # SMS Provider machine name
 
 # Import the ConfigurationManager.psd1 module 
-if((Get-Module ConfigurationManager) -eq $null) {
+if($null -eq (Get-Module ConfigurationManager)) {
     Import-Module "$($ENV:SMS_ADMIN_UI_PATH)\..\ConfigurationManager.psd1" @initParams 
 }
 # Connect to the site's drive if it is not already present
-if((Get-PSDrive -Name $SiteCode -PSProvider CMSite -ErrorAction SilentlyContinue) -eq $null) {
+if($null -eq (Get-PSDrive -Name $SiteCode -PSProvider CMSite -ErrorAction SilentlyContinue)) {
     New-PSDrive -Name $SiteCode -PSProvider CMSite -Root $ProviderMachineName @initParams
 }
 # Set the current location to be the site code.
@@ -25,10 +25,10 @@ $HouseName= "House201"
 
 #CSV Path
 $Path = "C:\Script\$Collectionname.csv"
-$ResultPath = "C:\Script\result+$Collectionname.csv"
+
 
 #Gathering all the computers inside a collection to a variable
-$computer = Get-CmCollectionMember -CollectionName $CollectionName | Select Name
+$computer = Get-CmCollectionMember -CollectionName $CollectionName | Select-Object Name
 $Computers = $Computer."name"
 
 
@@ -38,7 +38,7 @@ $i=1
 $Computers | ForEach-Object {
 Set-Location "$($SiteCode):\" @initParams
 $Computer = $_
-$Variable = Get-CMDeviceVariable -DeviceName $_ | select name, value | where {$_.name -eq "City"}
+$Variable = Get-CMDeviceVariable -DeviceName $_ | Select-Object name, value | Where-Object {$_.name -eq "City"}
 set-location "C:\"
 
     $hash = @{
